@@ -24,6 +24,17 @@ Hello Closures!
 Hello Closures!
 Hello Closures!
 ```
+```swift
+func applyKTimes(_ K: Int, _ closure: () -> ()){
+for i in 0..<K{
+closure()
+}
+}
+
+applyKTimes(3) {
+print("Hello Closures!")
+}
+```
 
 
 ## Question 2
@@ -37,6 +48,13 @@ Input: `let numbers = [1, 2, 3, 4, 6, 8, 9, 3, 12, 11]`
 
 Expected values: `multiples = [3, 6, 9, 3, 12]`
 
+```swift
+let numbers = [1, 2, 3, 4, 6, 8, 9, 3, 12, 11]
+
+let multiples = numbers.filter {$0 % 3 == 0}
+print(multiples)
+```
+
 
 ## Question 3
 
@@ -46,7 +64,12 @@ Example:
 Input: `let numbers = [4, 7, 1, 9, 6, 5, 6, 9]`
 
 Output: `9`
+```swift
+let numbers = [4, 7, 1, 9, 6, 5, 6, 9]
 
+let bigNum = numbers.reduce(0, { x,y in x > y ? x : y})
+print(bigNum)
+```
 
 ## Question 4
 
