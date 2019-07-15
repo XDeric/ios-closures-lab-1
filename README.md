@@ -395,7 +395,58 @@ return emptyArr
 
 let a = intsToStrings(arr: theInts, toString: englishWords)
 print(a)
+
 //e.
+//sub B.
+let theInts = [1, 2, 3, 44, 555, 6600, 10763]
+let test = theInts.map{String($0)}
+print(test)
+//sub C.
+let theInts = [1, 2, 3, 44, 555, 6600, 10763]
+let test = theInts.map{ (a: Int) -> String in
+if a % 2 == 0{
+return "Even"
+}
+else{
+return "Odd"
+}
+}
+print(test)
+//sub D.
+let theInts = [1, 2, 3, 44, 555, 6600, 10763]
+let test = theInts.map{ (a: Int) -> String in
+var emptyString = String()
+
+for num in String(a){
+switch num {
+case "1":
+emptyString += "One"
+case "2":
+emptyString += "Two"
+case "3":
+emptyString += "Three"
+case "4":
+emptyString += "Four"
+case "5":
+emptyString += "Five"
+case "6":
+emptyString += "Six"
+case "7":
+emptyString += "Seven"
+case "8":
+emptyString += "Eight"
+case "9":
+emptyString += "Nine"
+case "0":
+emptyString += "Zero"
+default:
+emptyString += "Over 9000 "
+}
+}
+return emptyString
+}
+print(test)
+
 ```
 
 ## Question 12
