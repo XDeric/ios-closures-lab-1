@@ -79,6 +79,12 @@ Example:
 Input: `let strings = ["We", "Heart", "Swift"]`
 
 Output: `"We Heart Swift"`
+```swift
+let strings = ["We", "Heart", "Swift"]
+
+let combine = strings.reduce("",{$0 + " " + $1})
+print(combine)
+```
 
 
 ## Question 5
@@ -91,7 +97,22 @@ b. Use `sortedBy` to sort `cities` alphabetical order of the second character of
 
 c. Use `sortedBy` to sort `cities` in order of the length of the city name.
 
+```swift 
+//1.
+let cities = ["Shanghai", "Beijing", "Delhi", "Lagos", "Tianjin", "Karachi", "Karachi", "Tokyo", "Guangzhou", "Mumbai", "Moscow", "São Paulo"]
 
+print(cities.sorted(by: <))
+
+//2.
+print(cities.sorted(by:{(s1: String, s2: String)-> Bool in
+return (s1.dropFirst(1)) < (s2.dropFirst(1))}))
+
+//3.
+print(cities.sorted(by: {(s1: String,s2: String)->Bool in
+return s1.count > s2.count
+}))
+
+```
 ## Question 6
 
 `let citiesWithPopulation: [(String, Int)] = [("Shanghai", 24256800), ("Beijing", 21516000), ("Delhi", 16787941), ("Lagos", 16060303), ("Tianjin", 15200000), ("Karachi", 14910352), ("Karachi", 14160467), ("Tokyo", 13513734), ("Guangzhou", 13080500), ("Mumbai", 12442373), ("Moscow", 12380664), ("São Paulo", 12038175)]`
@@ -100,6 +121,13 @@ a. Use `sortedBy` to sort `citiesWithPopulation` in ascending order of populatio
 
 b. Use `sortedBy` to sort `citiesWithPopulation` in reverse alphabetical order of the last character in the city name.
 
+```swift
+//1.
+print(citiesWithPopulation.sorted(by: {(s1: (String,Int), s2: (String,Int)) ->Bool in return s1.1 < s2.1}))
+
+//2.
+print(citiesWithPopulation.sorted(by: {(s1: (String,Int), s2: (String,Int)) ->Bool in return s1.0.last! > s2.0.last!}))
+```
 
 ## Question 7
 
@@ -121,7 +149,28 @@ numbers = [1, 2, 3, 5, 4, 6]
 
 // [1, 5, 2, 3, 4, 6] would also have been a valid solution
 ```
+```swift
+// I didn't use closure sorry
+var index = 0
 
+func divisor()-> Int{
+var count = 0
+
+for i in 1...numbers[index]{
+if numbers[index] % i == 0{
+count += 1
+}
+
+}
+index += 1
+return count
+}
+var a = 0
+while a < 6{
+print("The number: \(numbers[index])  has \(divisor()) divisors")
+a += 1
+}
+```
 
 ## Question 8
 
@@ -141,6 +190,18 @@ Example:
 Input: `var numbers = [1, 2, 3, 4, 5, 6]`
 
 Output: `35 // 1 + 9 + 25 -> 35`
+
+```swift
+var numbers = [1, 2, 3, 4, 5, 6]
+//a.
+numbers.filter{$0 % 2 != 0}
+//b.
+numbers.filter{$0 * $0}
+//c.
+numbers.reduce(0, +)
+//d.
+print(((numbers.filter{$0 % 2 != 0}).map{$0 * $0}).reduce(0, +))
+```
 
 
 ## Question 9
@@ -164,6 +225,18 @@ Output:
 9
 16
 ```
+```swift
+var numbers = [1, 2, 3, 4, 5, 6]
+
+func forEach(_ array: [Int], _ closure: (Int) -> ()){
+for i in array{
+closure(i)
+}
+}
+forEach(numbers) {
+print($0 * $0)
+}
+```
 
 ## Question 10
 
@@ -181,7 +254,22 @@ combineArrays(array1,array2) {
 ```
 
 Output: `[5,10,15,12]`
+```swift
+func combineArrays (arr1 : [Int], arr2: [Int], _ closure: (Int,Int)->()){
+var index = 0
+for i in arr1{
+closure(i , arr2[index])
+index += 1
+}
+}
 
+var array1 = [1,2,3,4]
+var array2 = [5,5,5,3]
+
+combineArrays(arr1: array1, arr2: array2, {
+print($0 * $1)
+})
+```
 
 ## Question 11
 
@@ -213,7 +301,102 @@ a) ["1", "2", "3", "44", "555", "6600", "10763"]
 b) ["odd", "even", "odd", "even", "odd", "even", "odd"]
 c) ["one ", "two ", "three ", "four four ", "five five five ", "six six zero zero ", "one zero seven six three "]
 ```
+```swift
+//a.
+let theInts = [1, 2, 3, 44, 555, 6600, 10763]
+var emptyArr = [String]()
 
+func intsToStrings(_ arr: [Int],_ closure: (Int)->String){
+for i in arr{
+emptyArr.append(closure(i))
+}
+}
+
+intsToStrings(theInts, { (String($0)) })
+print(emptyArr)
+
+//b.
+let theInts = [1, 2, 3, 44, 555, 6600, 10763]
+let asString = { (a: Int) -> String in return String(a)}
+
+func intsToStrings(arr: [Int],toString closure: (Int) -> String) -> [String] {
+var emptyArr = [String]()
+for i in arr {
+emptyArr.append(closure(i))
+}
+return emptyArr
+}
+
+let a = intsToStrings(arr: theInts, toString: asString)
+print(a)
+
+//c.
+let theInts = [1, 2, 3, 44, 555, 6600, 10763]
+let evenOdd = { (a: Int) -> String in
+if a % 2 == 0{
+return "Even"
+}
+else{
+return "Odd"
+}
+}
+
+func intsToStrings(arr: [Int],toString closure: (Int) -> String) -> [String] {
+var emptyArr = [String]()
+for i in arr {
+emptyArr.append(closure(i))
+}
+return emptyArr
+}
+
+let a = intsToStrings(arr: theInts, toString: evenOdd)
+print(a)
+//d.
+let theInts = [1, 2, 3, 44, 555, 6600, 10763]
+let englishWords = { (a: Int) -> String in
+var emptyString = String()
+
+for num in String(a){
+switch num {
+case "1":
+emptyString += "One"
+case "2":
+emptyString += "Two"
+case "3":
+emptyString += "Three"
+case "4":
+emptyString += "Four"
+case "5":
+emptyString += "Five"
+case "6":
+emptyString += "Six"
+case "7":
+emptyString += "Seven"
+case "8":
+emptyString += "Eight"
+case "9":
+emptyString += "Nine"
+case "0":
+emptyString += "Zero"
+default:
+emptyString += "Over 9000 "
+}
+}
+return emptyString
+}
+
+func intsToStrings(arr: [Int],toString closure: (Int) -> String) -> [String] {
+var emptyArr = [String]()
+for i in arr {
+emptyArr.append(closure(i))
+}
+return emptyArr
+}
+
+let a = intsToStrings(arr: theInts, toString: englishWords)
+print(a)
+//e.
+```
 
 ## Question 12
 
