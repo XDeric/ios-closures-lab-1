@@ -580,6 +580,29 @@ b) Sort the string below in ascending order according the dictionary `letterValu
 
 `var codeStringTwo = "znwemnrfewpiqn"`
 
+```swift
+//a.
+var codeString = "aldfjaekwjnfaekjnf"
+let stringArr = Array(codeString)
+
+let test = stringArr.sorted(by: {(a: Character, b: Character)-> Bool in
+letterValues
+return a > b
+})
+print(String(test))
+
+//b.
+var codeStringTwo = "znwemnrfewpiqn"
+let stringArr = Array(codeStringTwo)
+
+let ascending = stringArr.sorted(by: {(a: Character, b: Character)-> Bool in
+letterValues
+return a < b
+})
+print(String(ascending))
+
+```
+
 ## Question 15
 
 ```swift
