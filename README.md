@@ -622,6 +622,22 @@ Bach, Johann S.
 Des Prez, Josquin
 ...etc
 ```
+```swift 
+let firstAndLastTuples = [("Johann S.", "Bach"),
+("Claudio", "Monteverdi"),
+("Duke", "Ellington"),
+("W. A.", "Mozart"),
+("Nicolai","Rimsky-Korsakov"),
+("Scott","Joplin"),
+("Josquin","Des Prez")]
+
+let nameOrder = firstAndLastTuples.sorted(by: {(s1: (String,String), s2: (String,String)) ->Bool in return s1.1 < s2.1})
+
+for i in nameOrder{
+print("Name:\(i.1), \(i.0)")
+}
+```
+
 
 ## Question 16
 
