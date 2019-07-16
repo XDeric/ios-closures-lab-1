@@ -194,11 +194,31 @@ Output: `35 // 1 + 9 + 25 -> 35`
 ```swift
 var numbers = [1, 2, 3, 4, 5, 6]
 //a.
-numbers.filter{$0 % 2 != 0}
+var index = 0
+for i in numbers{
+if i % 2 != 0{
+numbers.remove(at: index)
+index += 1
+}
+}
+print(numbers)
 //b.
-numbers.filter{$0 * $0}
+var numbers = [1, 2, 3, 4, 5, 6]
+//b.
+var index = 0
+for i in numbers{
+numbers[index] = i * i
+index += 1
+}
+print(numbers)
 //c.
-numbers.reduce(0, +)
+var numbers = [1, 2, 3, 4, 5, 6]
+var sum = 0
+//c.
+for i in numbers{
+sum = sum + i
+}
+print(sum)
 //d.
 print(((numbers.filter{$0 % 2 != 0}).map{$0 * $0}).reduce(0, +))
 ```
@@ -456,15 +476,19 @@ let myArray = [34,42,42,1,3,4,3,2,49]
 a) Sort `myArray` in ascending order by defining the constant `ascendingOrder` below.
 
 ```swift
-let mySortedArray = myArray.sort(ascendingOrder)
-let ascendingOrder =
+var myArray = [34,42,42,1,3,4,3,2,49]
+
+let ascendingOrder = {(a: Int, b: Int) -> Bool in return a < b}
+var mySortedArray = myArray.sort(by: ascendingOrder)
+print(myArray)
 ```
 
 b) Sort `myArray` in descending order by defining the constant `descendingOrder` below.
 
 ```swift
+let descendingOrder = {(a: Int, b: Int) -> Bool in return a > b}
 let mySecondSortedArray = myArray.sort(descendingOrder)
-let descendingOrder =
+print(myArray)
 ```
 
 
@@ -475,6 +499,44 @@ let descendingOrder =
 a) Sort `arrayOfArrays` in ascending order by the **3rd element** in each array. You can assume each array will have at least 3 elements.
 
 b) Sort `arrayOfArrays` in ascending order by the 3rd element in each array. Don't assume each array will have at least 3 elements. Put all arrays that have less than 3 elements at the end in any order.
+
+```swift
+//a.
+let arrayOfArrays = [[3,65,2,4],
+[25,3,1,6],
+[245,2,3,5,74]]
+
+var arrMatrix = arrayOfArrays.sorted(by: {(a:[Int],b:[Int])->Bool in
+if a[2] > b[2]{
+return true
+}
+else{
+return false
+}
+})
+print(arrMatrix)
+//b.
+// has an error tried making an array of 2 ints but got error
+var arrayOfArrays = [[3,65,2,4],
+[25,3,1,6],
+[245,2,3,5,74],
+[1,2]]
+
+var arrMatrix = arrayOfArrays.sorted(by: {(a:[Int],b:[Int])->Bool in
+if a.count <= 3 && b.count <= 3{
+arrayOfArrays.append(a)
+return false
+}
+else if a[2] > b[2]{
+return true
+}
+else{
+return false
+}
+})
+print(arrMatrix)
+
+```
 
 
 ## Question 14
