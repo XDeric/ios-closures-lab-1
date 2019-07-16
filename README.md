@@ -669,3 +669,80 @@ a. [11.45, 58.65, 66]
 b. [4, 66, 5]
 c. [4, 58.65, 66]
 ```
+
+```swift
+//a.
+let theDoubles = [11.45, 3.2, 4.0, 5.67, 58.65, 66.0, 5.2, 5.0]
+
+var emptyArr = [Double]()
+
+func myFilter(_ arr: [Double],_ closure: (Double)->Bool) -> [Double]{
+for i in arr{
+if closure(i){
+emptyArr.append(i)
+}
+}
+return emptyArr
+}
+
+myFilter(theDoubles,  { $0 == $0 })
+print(emptyArr)
+
+//b.
+let theDoubles = [11.45, 3.2, 4.0, 5.67, 58.65, 66.0, 5.2, 5.0]
+
+var emptyArr = [Double]()
+
+func myFilter(_ arr: [Double],_ closure: (Double)->Bool) -> [Double]{
+for i in arr{
+if closure(i){
+emptyArr.append(i)
+}
+}
+return emptyArr
+}
+
+myFilter(theDoubles,  { $0 >= 10 })
+print(emptyArr)
+
+//c.let theDoubles = [11.45, 3.2, 4.0, 5.67, 58.65, 66.0, -5.2, -5.0]
+
+var emptyArr = [Double]()
+
+func myFilter(_ arr: [Double],_ closure: (Double)->Bool) -> [Double]{
+for i in arr{
+if closure(i){
+emptyArr.append(i)
+}
+}
+return emptyArr
+}
+
+myFilter(theDoubles,  { Int($0) / 1 > 0 })
+print(emptyArr)
+
+
+//d.
+let theDoubles = [11.45, 3.2, 4.0, 5.67, 58.65, 66.0, 5.2, 5.0]
+
+var emptyArr = [Double]()
+
+func myFilter(_ arr: [Double],_ closure: (Double)->Bool) -> [Double]{
+for i in arr{
+if closure(i){
+emptyArr.append(i)
+}
+}
+return emptyArr
+}
+
+myFilter(theDoubles,  { Int($0) % 2 == 0})
+print(emptyArr)
+
+//e.
+//sub B.
+print(theDoubles.filter{ $0 >= 10 })
+//sub C.
+print(theDoubles.filter{ Int($0) / 1 > 0 })
+//sub D.
+print(theDoubles.filter{ Int($0) % 2 == 0})
